@@ -19,7 +19,7 @@ import com.example.empleos.service.ICategoriasService;
 public class CategoriasController {
 	
 	@Autowired
-	@Qualifier("categoriasServiceJpa")
+	//@Qualifier("categoriasServiceJpa")
    	private ICategoriasService serviceCategorias;
 	
 	@RequestMapping(value="/index", method=RequestMethod.GET)

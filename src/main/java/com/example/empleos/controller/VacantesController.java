@@ -38,7 +38,7 @@ public class VacantesController {
 	private IVacantesService serviceVacantes;
 	
 	@Autowired
-	@Qualifier("categoriasServiceJpa")
+	//@Qualifier("categoriasServiceJpa")
 	private ICategoriasService serviceCategorias; 
 	
 	@GetMapping("/index")

@@ -11,7 +11,7 @@ import com.example.empleos.repository.CategoriasRepository;
 import com.example.empleos.service.ICategoriasService;
 
 @Service
-//@Primary
+@Primary
 public class CategoriasServiceJpa implements ICategoriasService {
 
 	@Autowired

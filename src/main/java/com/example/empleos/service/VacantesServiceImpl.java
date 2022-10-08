@@ -79,7 +79,6 @@ public class VacantesServiceImpl implements IVacantesService {
 			return lista;
 		}
 
-		@Override
 		public Vacante buscarPorId(Integer idVacante) {
 
 			for (Vacante v : lista) {
@@ -93,6 +92,12 @@ public class VacantesServiceImpl implements IVacantesService {
 		
 		public void guardar(Vacante vacante) {
 			lista.add(vacante);
+		}
+
+
+		public List<Vacante> buscarDestacadas() {
+			// TODO Auto-generated method stub
+			return null;
 		}
 
 	}
