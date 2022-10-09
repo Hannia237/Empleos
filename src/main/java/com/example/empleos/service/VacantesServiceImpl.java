@@ -73,8 +73,7 @@ public class VacantesServiceImpl implements IVacantesService {
 			}
 			
 		}
-		
-		@Override
+
 		public List<Vacante> buscarTodas() {
 			return lista;
 		}
@@ -94,10 +93,14 @@ public class VacantesServiceImpl implements IVacantesService {
 			lista.add(vacante);
 		}
 
-
 		public List<Vacante> buscarDestacadas() {
 			// TODO Auto-generated method stub
 			return null;
+		}
+
+		public void eliminar(Integer idVacante) {
+			// TODO Auto-generated method stub
+			
 		}
 
 	}
