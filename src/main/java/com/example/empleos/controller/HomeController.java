@@ -9,15 +9,27 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.example.empleos.model.Perfil;
+import com.example.empleos.model.Usuario;
 import com.example.empleos.model.Vacante;
+import com.example.empleos.service.ICategoriasService;
+import com.example.empleos.service.IUsuariosService;
 import com.example.empleos.service.IVacantesService;
 
 @Controller
 public class HomeController {
 	
+	@Autowired 
+	private ICategoriasService serviceCategorias;
+	
 	@Autowired
 	private IVacantesService serviceVacantes;
+	
+	@Autowired
+	private IUsuariosService serviceUsuarios;
 	
 	@GetMapping("/tabla")
 	public String mostrarTabla(Model model) {
@@ -50,15 +62,46 @@ public class HomeController {
 		
 		return "listado";
 	}
-
+	
 	@GetMapping("/")
 	public String mostrarHome(Model model) {
 		return "home";
 	}
 	
+	@GetMapping("/signup")
+	public String registrarse(Usuario usuario) {
+		return "usuarios/formRegistro";
+	}
+	
+	@PostMapping("/signup")
+	public String guardarRegistro(Usuario usuario, RedirectAttributes attributes) {
+		
+		 usuario.setEstatus(1);
+		 usuario.setFechaRegistro(new Date());
+		 
+		 Perfil perfil = new Perfil();
+		 perfil.setId(3);
+		 usuario.agregar(perfil);
+			
+		 serviceUsuarios.guardar(usuario);
+		 attributes.addFlashAttribute("msg", "Usuario guardado!");
+		 
+		 return "redirect:/usuarios/index";
+	}
+	
+	@GetMapping("/search")
+	public String buscar(@ModelAttribute("search") Vacante vacante) {
+		System.out.println("Buscando por : " + vacante);
+		return "home";
+	}
+	
 	@ModelAttribute
 	public void setGenericos(Model model) {
+		Vacante vacanteSearch = new Vacante();
+		vacanteSearch.reset();
 		model.addAttribute("vacantes", serviceVacantes.buscarDestacadas());
+		model.addAttribute("categorias", serviceCategorias.buscarTodas());
+		model.addAttribute("search", vacanteSearch);
 	}
 	
 }

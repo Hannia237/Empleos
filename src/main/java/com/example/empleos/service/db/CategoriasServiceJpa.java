@@ -35,4 +35,8 @@ public class CategoriasServiceJpa implements ICategoriasService {
 		return null;
 	}
 
+	public void eliminar(Integer idCategoria) {
+		categoriasRepo.deleteById(idCategoria);
+	}
+
 }
