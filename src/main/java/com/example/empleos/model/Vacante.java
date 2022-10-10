@@ -2,8 +2,20 @@ package com.example.empleos.model;
 
 import java.util.Date;
 
-public class Vacante {
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
+@Entity
+@Table(name="Vacantes")
+public class Vacante {
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	private String nombre;
 	private String descripcion;
@@ -13,6 +25,9 @@ public class Vacante {
 	private String imagen="no-image.png";
 	private String estatus;
 	private String detalles;
+	//@Transient
+	@OneToOne
+	@JoinColumn(name="idCategoria")
 	private Categoria categoria;
 
 	public Integer getId() {
@@ -101,6 +116,10 @@ public class Vacante {
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
 	}
+	
+	public void reset() {
+		this.imagen=null;
+	}
 
 	@Override
 	public String toString() {
@@ -108,8 +127,6 @@ public class Vacante {
 				+ ", salario=" + salario + ", destacado=" + destacado + ", imagen=" + imagen + ", estatus=" + estatus
 				+ ", detalles=" + detalles + ", categoria=" + categoria + "]";
 	}
-
-	
 	
 
 }
