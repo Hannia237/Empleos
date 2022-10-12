@@ -3,7 +3,6 @@ package com.example.empleos.service;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.springframework.context.annotation.Primary;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;

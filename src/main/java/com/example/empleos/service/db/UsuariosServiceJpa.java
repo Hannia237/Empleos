@@ -25,9 +25,12 @@ public class UsuariosServiceJpa implements IUsuariosService {
 		usuariosRepo.deleteById(idUsuario);
 	}
 
-	@Override
 	public List<Usuario> buscarTodos() {
 		return usuariosRepo.findAll();
+	}
+
+	public Usuario buscarPorUsername(String username) {
+		return usuariosRepo.findByUsername(username);
 	}
 
 }
