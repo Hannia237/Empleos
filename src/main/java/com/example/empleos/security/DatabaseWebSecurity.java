@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @Configuration
 @EnableWebSecurity
 public class DatabaseWebSecurity extends WebSecurityConfigurerAdapter {
+	
 	@Autowired
 	private DataSource dataSource;
 	
@@ -28,6 +29,7 @@ public class DatabaseWebSecurity extends WebSecurityConfigurerAdapter {
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
+		
 		http.authorizeRequests()
 		// Los recursos estáticos no requieren autenticación
 		.antMatchers(
@@ -40,6 +42,12 @@ public class DatabaseWebSecurity extends WebSecurityConfigurerAdapter {
 			"/signup",
 			"/search",
 			"/vacantes/view/**").permitAll()
+		
+		// Asignar permisos a URLs por ROLES
+		.antMatchers("/vacantes/**").hasAnyAuthority("SUPERVISOR","ADMINISTRADOR")
+		.antMatchers("/categorias/**").hasAnyAuthority("SUPERVISOR","ADMINISTRADOR") 
+		.antMatchers("/usuarios/**").hasAnyAuthority("ADMINISTRADOR")
+		
 		// Todas las demás URLs de la Aplicación requieren autenticación
 		.anyRequest().authenticated()
 		// El formulario de Login no requiere autenticacion
